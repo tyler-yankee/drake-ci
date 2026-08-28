@@ -22,8 +22,12 @@ if [[ "$(uname -s)" == "Linux" && "${JOB_NAME}" =~ unprovisioned ]]; then
     if [[ "${JOB_NAME}" =~ amd64v[0-24-9] ]]; then
         install_prereqs_args+=(--disable-amd64v3)
     fi
-    sudo PATH="${PATH}" WORKSPACE="${WORKSPACE}" \
-        "${CI_ROOT}/setup/ubuntu/install_prereqs" "${install_prereqs_args[@]}"
+    if ! sudo PATH="${PATH}" WORKSPACE="${WORKSPACE}" \
+        "${CI_ROOT}/setup/ubuntu/install_prereqs" \
+        "${install_prereqs_args[@]}"; then
+        echo "FAILURE" > "${WORKSPACE}/RESULT"
+        exit 1
+    fi
 fi
 
 # Synchronize the system clock (so log timestamps will be accurate).
@@ -58,4 +62,4 @@ if [[ "$(uname -s)" == Darwin ]]; then
 fi
 
 # Hand off to the CMake driver script.
-$AGENT ctest --extra-verbose --no-compress-output --script "${CI_ROOT}/ctest_driver_script.cmake"
+$AGENT ctest -VV --no-compress-output -S "${CI_ROOT}/ctest_driver_script.cmake"
