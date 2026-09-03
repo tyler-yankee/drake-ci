@@ -39,7 +39,7 @@ if(PROVISION)
   endif()
 
   set(PROVISION_SCRIPT "${DASHBOARD_SOURCE_DIRECTORY}/setup/install_prereqs")
-  set(PROVISION_ARGS "-y")
+  set(PROVISION_ARGS "-y --verbose")
   if(NOT GENERATOR STREQUAL "cmake" OR PACKAGE)
     string(APPEND PROVISION_ARGS " --developer")
   endif()

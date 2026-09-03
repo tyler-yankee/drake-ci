@@ -205,7 +205,7 @@ if(NOT PROVISION)
   endif()
 
   set(PROVISION_SCRIPT "${DASHBOARD_SOURCE_DIRECTORY}/setup/install_prereqs")
-  set(PROVISION_ARGS "-y --user-environment-only")
+  set(PROVISION_ARGS "-y --user-environment-only --verbose")
   message(STATUS "Executing user environment provisioning script...")
     execute_process(COMMAND bash "-c" "${PROVISION_SCRIPT} ${PROVISION_ARGS}"
       RESULT_VARIABLE INSTALL_PREREQS_RESULT_VARIABLE)

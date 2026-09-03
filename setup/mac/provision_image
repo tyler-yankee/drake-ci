@@ -151,4 +151,4 @@ if [[ ! -f "${drake_setup_script}" ]]; then
   die "drake setup script not found; expected: ${drake_setup_script}"
 fi
 # Use `--developer` to install the prereqs for building wheels.
-"${drake_setup_script}" --developer
+"${drake_setup_script}" --verbose --developer
