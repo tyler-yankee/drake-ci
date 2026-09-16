@@ -53,13 +53,5 @@ if [[ "$(uname -s)" == Darwin ]]; then
   sudo rm -rf $HOME/Library/Caches/bazel
 fi
 
-# macOS: Enable multicast traffic on loopback interface for LCM.
-# sudo is needed to modify the routing table
-if [[ "$(uname -s)" == Darwin ]]; then
-    sudo route -nv delete 224.0.0.0/4
-    sudo route -nv add -net 224.0.0.0/4 -interface lo0
-    netstat -nr
-fi
-
 # Hand off to the CMake driver script.
 $AGENT ctest -VV --no-compress-output -S "${CI_ROOT}/ctest_driver_script.cmake"
