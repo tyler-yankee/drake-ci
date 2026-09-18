@@ -44,7 +44,7 @@ sudo defaults write /Library/Preferences/com.apple.SoftwareUpdate \
 
 feedback "Disabling Spotlight indexing and filesystem logs..."
 sudo mdutil -a -i off
-readonly data_dir="/System/Volumes/Data/"
+readonly data_dir="/System/Volumes/Data"
 sudo rm -rf "$data_dir/.Spotlight*"
 readonly never_index="$data_dir/.metadata_never_index"
 sudo touch $never_index
